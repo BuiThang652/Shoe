@@ -1,0 +1,185 @@
+.products > img {
+  width: 100%;
+  height: 260px;
+  margin: 0 0 -4px 0;
+}
+
+.products .container {
+  position: relative;
+}
+
+.products__bot {
+  position: absolute;
+  width: 100%;
+  height: 260px;
+  padding-top: 35px;
+  padding-left: 520px;
+}
+
+.products__bot--title {
+  display: flex;
+  align-items: center;
+}
+
+.products__bot--title h1 {
+  padding: 0 10px;
+  font-size: 36px;
+  width: 300px;
+  margin: 0;
+}
+
+.products__bot p {
+  width: 310px;
+  margin: 5px 0;
+}
+
+.shopby {
+  background: var(--dark);
+}
+
+.shopby .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  padding: 0 20px;
+}
+
+.shopby .container h2 {
+  color: var(--light-text-color);
+  font-weight: 300;
+  padding: 0 40px;
+  margin-left: 50px;
+}
+
+.shopby__brands span {
+  padding: 0 15px;
+}
+
+.shopby .container > div {
+  background: var(--dark-1);
+  color: var(--light-text-color);
+  padding: 20px 50px;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.main__block__top--left {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.products--menu {
+  padding-left: 10px;
+  text-align: center;
+}
+
+.main__block__top--left .products--menu a {
+  text-decoration: none;
+  font-size: 12px;
+  color: var(--gray-bg);
+}
+
+.main__block__top--right1,
+.main__block__top--right2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main__block__top--right1 {
+  display: none;
+}
+
+.main__block__top--right1 p,
+.main__block__top--right2 p {
+  font-size: 12px;
+  color: var(--gray-bg);
+}
+
+.main__block__top--right1 a,
+.main__block__top--right2 a {
+  color: var(--gray-bg);
+  text-decoration: none;
+  padding: 5px 5px;
+  border: 1px solid var(--gray-bg);
+}
+
+.products--menu--active {
+  border: 2px solid var(--gray-text-color) !important;
+  color: var(--gray-text-color) !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+@media screen and (max-width: 992px) {
+  .products__bot {
+    position: absolute;
+    width: 100%;
+    height: 260px;
+    padding-top: 35px;
+    padding-left: 380px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .products__bot {
+    position: absolute;
+    width: 100%;
+    height: 260px;
+    padding-top: 30px;
+    padding-left: 228px;
+  }
+
+  .shopby .container > div {
+    background: var(--dark-1);
+    color: var(--light-text-color);
+    padding: 20px 35px;
+    margin: 0 5px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .products__bot {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 30px;
+    justify-content: center;
+  }
+
+  .shopby .container h2 {
+    display: none;
+  }
+
+  .shopby .container > div {
+    background: var(--dark-1);
+    color: var(--light-text-color);
+    padding: 20px 15px;
+    margin: 0 5px;
+    text-align: center;
+  }
+  .main__block__top--right2 {
+    display: none;
+  }
+  .main__block__top--right1 {
+    display: block;
+    position: relative;
+  }
+
+  .products--menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 37.8px;
+    left: -121px;
+    z-index: 1;
+    background: var(--light-text-color);
+    padding: 0;
+  }
+}

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/icon.css">
+    <link rel="stylesheet" href="./assets/css/style_cart.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Cart</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__logo">
+                <a href="./index.html">FOOSESHOES</a>
+            </div>
+            <div class="header__right">
+                <div class="header__right__search">
+                    <form action="">
+                        <input type="search" name="search" id="search" class="d--none">
+                        <label for="search"><span class="icon-search1"></span></label>
+                    </form>
+                </div>
+                <div class="header__right__lr">
+                    <a href="#">LOGIN</a> <a href="#">or REGISTER</a>
+                </div>
+            </div>
+            <div class="header__menu">
+                <div class="header__menu--logo">
+                    <span class="icon-menu"></span>
+                </div>
+
+                <ul class="header__menu--nav nav--toggle">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./products.html">Products</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Pages</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#"><span class="icon-star-empty"></span><span class="nav--star">30</span></a></li>
+                    <li><a href="./cart.html"><span class="icon-shopping-cart"></span><span
+                                class="nav--cart">0</span></a></li>
+                    <li>
+                        <form action="">
+                            <input type="search" name="search" id="search" class="">
+                            <label for="search"><span class="icon-search1"></span></label>
+                        </form>
+                    </li>
+                    <li>
+                        <a href="#">LOGIN</a> <a href="#">or REGISTER</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <!-- End header -->
+
+    <!-- Nav -->
+    <nav class="nav__list">
+        <div class="container">
+            <div class="nav__left">
+                <ul class="nav">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./products.html">Products</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Pages</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="nav__right">
+                <ul class="nav">
+                    <li><a href="#"><span class="icon-star-empty"></span><span class="nav--star">30</span></a></li>
+                    <li><a href="./cart.html"><span class="icon-shopping-cart"></span><span
+                                class="nav--cart">0</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End nav -->
+
+    <main class="cart">
+        <div class="container">
+            <h1>Shopping Cart</h1>
+            <div class="">
+                <table class="cart__table">
+                    <tr>
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                        <th></th>
+                    </tr>
+
+                </table>
+                <div class="cart__bot">
+
+                </div>
+
+                <div class="cart__bot">
+                    <a href="./order.html" class="">Order</a>
+                    <a href="#" class="open--dialog">Checkout</a>
+                </div>
+            </div>
+            <div class="cart__dialog">
+                <form action="">
+                    <label for="">Name</label>
+                    <div class="form--pe">
+                        <div class="form--input">
+                            <input type="text" name="first-name" id="first-name" placeholder="First name">
+                        </div>
+                        <div class="form--input">
+                            <input type="text" name="last-name" id="last-name" placeholder="Last name">
+                        </div>
+                    </div>
+                    <div class="form--pe">
+                        <div class="form--input">
+                            <label for="phone">Phone Number</label>
+                            <input type="number" name="phone" id="phone" placeholder="Phone">
+                        </div>
+                    </div>
+                    <div class="form--pe">
+                        <div class="form--input">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form--pe address">
+                        <label for="address">Address: </label>
+                        <div class="">
+                            <select name="conscious" id="conscious">
+                                <option value="">Province</option>
+                            </select>
+                            <select name="districts" id="districts">
+                                <option value="">Districts</option>
+                            </select>
+                            <select name="wards" id="wards">
+                                <option value="">Wards</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form--pe">
+                        <div class="form--input">
+                            <label for="street" id="lbStreet">Street Address:</label>
+                            <input type="text" name="street" id="street" placeholder="Street Address">
+                        </div>
+                    </div>
+                    <div class="form--pe">
+                        <div class="form--input form--status">
+                        </div>
+                    </div>
+
+                    <div class="form--pe">
+                        <a href="#" class="close--dialog">Cancel</a>
+                        <a href="" class="submit">Submit</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <div class="footer__top__right">
+                    <h4>TEXT WIDGET</h4>
+                    <p>Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies
+                        vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis
+                        mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+                </div>
+                <div class="footer__top__right">
+                    <h4>TWITTER WIDGET</h4>
+                    <p><span>@ericafustero</span> Why thank you. Your work looks awesome by the way!
+                        <span>@treemelody</span>
+                    </p>
+                    <span>19 days ago</span>
+                    <p><span>@ericafustero</span> Why thank you. Your work looks awesome by the way!
+                        <span>@treemelody</span>
+                    </p>
+                    <span>19 days ago</span>
+                </div>
+                <div class="footer__top__right">
+                    <h4>FLICKR WIDGET</h4>
+                    <div class="footer__top__right--img">
+                        <img src="./assets/img/widget1.jpg" alt="">
+                        <img src="./assets/img/widget2.png" alt="">
+                        <img src="./assets/img/widget3.png" alt="">
+                        <img src="./assets/img/widget4.png" alt="">
+                        <img src="./assets/img/widget5.png" alt="">
+                        <img src="./assets/img/widget6.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bot">
+                <form action="">
+                    <div class="gr">
+                        <input type="text" name="search" id="search" placeholder="Enter email for newsletter">
+                        <label for="search"><span class="icon-keyboard_arrow_right"></span></label>
+                    </div>
+                </form>
+                <ul class="footer__bot__right">
+                    <li><a href="#"><span class="icon-facebook"></span></a></li>
+                    <li><a href="#"><span class="icon-twitter"></span></a></li>
+                    <li><a href="#"><span class="icon-google-plus"></span></a></li>
+                    <li><a href="#"><span class="icon-linkedin2"></span></a></li>
+                    <li><a href="#"><span class="icon-flickr"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer -->
+
+    <div class="coppy--right">
+        <div class="container">
+            <div class="coppy--right--left">
+                <p>Copyright © Fooseshoes 2013. </p>
+                <p>Designed by EnzoLiVolti. </p>
+            </div>
+            <div class="coppy--right--right">
+                <a href="#">Home / </a>
+                <a href="#">Support / </a>
+                <a href="#">Terms and Conditions / </a>
+                <a href="#">Faqs / </a>
+                <a href="#">Contact us</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/main_cart.js"></script>
+    <script src="./assets/js/db.js"></script>
+    <script src="./assets/js/library.js"></script>
+    <script src="./assets/js/app_cart.js"></script>
+
+</body>
+
+</html>
