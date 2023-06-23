@@ -2,7 +2,15 @@ const cartTable = document.querySelector(".cart__table");
 const cartButton = document.querySelector(".cart--button");
 const cartInfo = document.querySelector(".cart__info");
 const cartTotal = document.querySelector(".cart--total");
-const cartApi = "https://shoe-data-8yxw.onrender.com/orders";
+const cartApi = "https://shoe-data-8yxw.onrender.com/orders/";
+
+// Lấy thông tin trên LocalStorage
+const dataProducts = LocalStorageManager.getDataLocalStorage(
+  keyLocalStorageListSP
+);
+const dataCart = LocalStorageManager.getDataLocalStorage(
+  keyLocalStorageItemCart
+);
 
 const renderDetailOrder = () => {
   cartTable.innerHTML = `
@@ -93,14 +101,6 @@ const detailOrder = (id) => {
 };
 
 (function start() {
-  // Lấy thông tin trên LocalStorage
-  const dataProducts = LocalStorageManager.getDataLocalStorage(
-    keyLocalStorageListSP
-  );
-  const dataCart = LocalStorageManager.getDataLocalStorage(
-    keyLocalStorageItemCart
-  );
-
   // Hiển thị ra màn hình tổng cart
   const spanProducts = document.querySelectorAll(".nav--cart");
   LocalStorageManager.renderTotalCart(spanProducts, dataCart);

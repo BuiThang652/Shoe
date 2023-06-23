@@ -300,6 +300,32 @@ const LocalStorageManager = (function () {
 
       return products;
     },
+
+    removeOrder(cartApi, id) {
+      const dataProducts =
+        LocalStorageManager.getDataLocalStorage("DANHSACHSP");
+
+      APIManager.getApi(cartApi, function (posts) {
+        posts.forEach((post) => {
+          if (post.id == id) {
+            const dataOrder = post.products;
+
+            dataOrder.map(function (itemOrder) {
+              dataProducts.map(function (itemSP) {
+                if (itemSP.id == itemOrder.id) {
+                  const updateSoLuong = itemSP.soLuong + itemOrder.soLuong;
+                  itemSP.soLuong = updateSoLuong;
+                  localStorage.setItem(
+                    "DANHSACHSP",
+                    JSON.stringify(dataProducts)
+                  );
+                }
+              });
+            });
+          }
+        });
+      });
+    },
   };
 })();
 
@@ -346,6 +372,11 @@ const APIManager = (function () {
 
     // Xóa Api
     deleteCart(id) {
+      LocalStorageManager.removeOrder(
+        "https://shoe-data-8yxw.onrender.com/orders/",
+        id
+      );
+
       const option = {
         method: "DELETE",
         headers: {
@@ -354,14 +385,14 @@ const APIManager = (function () {
         },
       };
 
-      fetch("https://shoe-data-8yxw.onrender.com/orders" + id, option)
+      fetch("https://shoe-data-8yxw.onrender.com/orders/" + id, option)
         .then(function (response) {
           return response.json();
         })
-        .then(function (posts) {
-          posts.forEach((post) => {
-            console.log(post);
-          });
+        .then(function () {
+          setTimeout(function () {
+            window.location.href = "order.html";
+          }, 1000);
         })
         .catch(function (err) {});
     },
