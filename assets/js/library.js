@@ -1,12 +1,62 @@
-const app = (function () {
+const LocalStorageManager = (function () {
   // private
+  let listData = [
+    {
+      id: 1,
+      name: "Sản phẩm 1",
+      price: 35000,
+      soLuong: 111,
+      thumb: "1.jpg",
+      status: "block--list--sale",
+    },
+    {
+      id: 2,
+      name: "Sản phẩm 2",
+      price: 10000,
+      soLuong: 211,
+      thumb: "2.jpg",
+      status: "d--none",
+    },
+    {
+      id: 3,
+      name: "Sản phẩm 3",
+      price: 30000,
+      soLuong: 211,
+      thumb: "3.jpg",
+      status: "d--none",
+    },
+    {
+      id: 4,
+      name: "Sản phẩm 4",
+      price: 35000,
+      soLuong: 111,
+      thumb: "4.jpg",
+      status: "d--none",
+    },
+    {
+      id: 5,
+      name: "Sản phẩm 5",
+      price: 10000,
+      soLuong: 211,
+      thumb: "5.jpg",
+      status: "block--list--stock",
+    },
+    {
+      id: 6,
+      name: "Sản phẩm 6",
+      price: 30000,
+      soLuong: 211,
+      thumb: "6.jpg",
+      status: "d--none",
+    },
+  ];
 
   // public
   return {
     // LocalStorage
     // Truyền vào key và value của mảng => lưu dữ liệu vào LocalStorage
-    saveDataLocalStorage(key, value) {
-      localStorage.setItem(key, JSON.stringify(value));
+    saveDataLocalStorage(key) {
+      localStorage.setItem(key, JSON.stringify(listData));
     },
 
     // Truyền vào key => Lấy ra dữ liệu được lấy trên LocalStorage
@@ -100,7 +150,7 @@ const app = (function () {
     // Truyền vào thẻ cha và dataCart => Hiển thị ra tổng sản phẩm trên thanh menu
     renderTotalCart(parent, dataCart) {
       parent.forEach((item) => {
-        item.innerHTML = `${app.totalProducts(dataCart)}`;
+        item.innerHTML = `${LocalStorageManager.totalProducts(dataCart)}`;
       });
     },
 
@@ -118,11 +168,14 @@ const app = (function () {
       showTotal.innerHTML = `
             <div class="cart__bot--discount">
                 <p>Discount</p>
-                <span>${app.totalProducts(dataCart)}</span>
+                <span>${LocalStorageManager.totalProducts(dataCart)}</span>
             </div>
             <div class="cart__bot--price">
                 <p>Total Price</p>
-                <span>${app.totalPrice(dataCart, dataProducts)} VND</span>
+                <span>${LocalStorageManager.totalPrice(
+                  dataCart,
+                  dataProducts
+                )} VND</span>
             </div>
         `;
     },
@@ -141,7 +194,10 @@ const app = (function () {
         let num = 0;
 
         dataCart.forEach((item) => {
-          const product = app.getbyidSP(item.idSP, dataProducts);
+          const product = LocalStorageManager.getbyidSP(
+            item.idSP,
+            dataProducts
+          );
 
           const showCart = document.querySelector(".cart__table");
 
@@ -161,7 +217,7 @@ const app = (function () {
                 `;
         });
 
-        app.renderTotalPriceCart(dataCart, dataProducts);
+        LocalStorageManager.renderTotalPriceCart(dataCart, dataProducts);
       }
     },
 
@@ -194,40 +250,269 @@ const app = (function () {
       localStorage.setItem(key, JSON.stringify(dataCart));
     },
 
-    oneProduct(parent, dataProducts) {
-      parent.forEach((item) => {
-        item.addEventListener("input", function (i) {
-          const id = i.target.id;
-          const valueQ = i.target.value;
-
-          const product = dataProducts.find((p) => p.id == id);
-          if (product) {
-            const tt = `.total-price-${id}`; // Sử dụng giá trị id đã lấy được
-
-            const totalProductPrice = document.querySelector(tt);
-            totalProductPrice.innerHTML = `$${valueQ * product.price}`;
-          }
-        });
-      });
-    },
-
     changeProductQuantityCart(key, dataCart, dataProducts, parent) {
       parent.forEach((item) => {
         item.addEventListener("input", function (i) {
           const id = item.id;
+          const idIP = i.target.id;
           const valueQ = i.target.value;
 
-          app.editQuantity(key, dataCart, id, valueQ);
+          const product = dataProducts.find((p) => p.id == idIP);
+          if (product) {
+            const tt = `.total-price-${idIP}`; // Sử dụng giá trị id đã lấy được
 
-          app.renderTotalCart(
+            const totalProductPrice = document.querySelector(tt);
+            totalProductPrice.innerHTML = `$${valueQ * product.price}`;
+          }
+
+          LocalStorageManager.editQuantity(key, dataCart, id, valueQ);
+
+          LocalStorageManager.renderTotalCart(
             document.querySelectorAll(".nav--cart"),
             dataCart
           );
 
-          app.renderTotalPriceCart(dataCart, dataProducts);
-          app.oneProduct(parent, dataProducts);
+          LocalStorageManager.renderTotalPriceCart(dataCart, dataProducts);
         });
       });
+    },
+
+    editSoLuong(keySP, dataProducts, dataCart) {
+      const products = [];
+      dataCart.map(function (itemCart) {
+        dataProducts.map(function (itemSP) {
+          if (itemSP.id == itemCart.idSP && itemCart.soLuong < itemSP.soLuong) {
+            const updateSoLuong = itemSP.soLuong - itemCart.soLuong;
+            itemSP.soLuong = updateSoLuong;
+            localStorage.setItem(keySP, JSON.stringify(dataProducts));
+          }
+        });
+      });
+
+      dataCart.map(function (itemCart) {
+        dataProducts.map(function (itemSP) {
+          if (itemSP.id == itemCart.idSP) {
+            itemSP.soLuong = itemCart.soLuong;
+            products.push(itemSP);
+          }
+        });
+      });
+
+      return products;
+    },
+  };
+})();
+
+const APIManager = (function () {
+  // private
+  const id = new Set([]);
+
+  // public
+  return {
+    // Lấy ra api
+    getApi(api, callback) {
+      fetch(api)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(callback)
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+
+    // Thêm api
+    createCart(data, url) {
+      const option = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(data),
+      };
+
+      fetch(url, option)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (posts) {
+          posts.forEach((post) => {
+            console.log(post);
+          });
+        })
+        .catch(function (err) {});
+    },
+
+    // Xóa Api
+    deleteCart(id) {
+      const option = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      };
+
+      fetch("https://shoe-data-8yxw.onrender.com/orders" + id, option)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (posts) {
+          posts.forEach((post) => {
+            console.log(post);
+          });
+        })
+        .catch(function (err) {});
+    },
+
+    // Tạo hàm random
+    getRandomInt() {
+      const min = 1000000000;
+      const max = 9999999999;
+
+      const random = Math.floor(Math.random() * (max - min)) + min;
+
+      if (id.has(random)) {
+        getRandomInt();
+      } else {
+        id.add(random);
+        return random;
+      }
+    },
+
+    // Check validate
+    checkValidateForm(
+      firstName,
+      lastName,
+      phone,
+      email,
+      conscious,
+      districts,
+      wards,
+      street
+    ) {
+      // Chuyển tất cả status về giỗng
+      document.querySelectorAll(".cart-status").forEach((e) => {
+        e.innerHTML = ``;
+      });
+
+      // Check Validate first name
+      if (firstName.value.trim() === "") {
+        document.querySelector(
+          ".first-name-status"
+        ).innerHTML = `First name must be filled out`;
+        return false;
+      }
+
+      // Check Validate last name
+      if (lastName.value.trim() === "") {
+        document.querySelector(
+          ".last-name-status"
+        ).innerHTML = `Last name must be filled out`;
+        return false;
+      }
+
+      // Check Validate phone number
+      if (phone.value.trim() === "") {
+        document.querySelector(
+          ".phone-status"
+        ).innerHTML = `Phone number must be filled out`;
+        return false;
+      }
+
+      // Check Validate email
+      if (email.value.trim() === "") {
+        document.querySelector(
+          ".email-status"
+        ).innerHTML = `Email must be filled out`;
+        return false;
+      }
+
+      // Check Validate address
+      if (
+        conscious.value === "" &&
+        districts.value === "" &&
+        wards.value === ""
+      ) {
+        document.querySelector(
+          ".address-status"
+        ).innerHTML = `Address must be filled out`;
+        return false;
+      }
+
+      // Check Validate street address
+      if (street.value.trim() === "") {
+        document.querySelector(
+          ".street-status"
+        ).innerHTML = `Street address must be filled out`;
+        return false;
+      }
+
+      return true;
+    },
+
+    // Save object
+    saveUserOrderInfo(
+      url,
+      keySP,
+      dataProducts,
+      dataCart,
+      firstName,
+      lastName,
+      phone,
+      email,
+      inputProvince,
+      inputDistricts,
+      inputWards,
+      street
+    ) {
+      const fullName = firstName.value + " " + lastName.value;
+      const valuePhone = phone.value;
+      const valueEmail = email.value;
+
+      const shipAddress =
+        street.value +
+        ", " +
+        inputWards.selectedOptions[0].text +
+        ", " +
+        inputProvince.selectedOptions[0].text +
+        ", " +
+        inputDistricts.selectedOptions[0].text;
+
+      let today = new Date();
+      let date =
+        today.getDate() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getFullYear();
+      let time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      let dateTime = date + " " + time;
+
+      products = LocalStorageManager.editSoLuong(keySP, dataProducts, dataCart);
+
+      const order = {
+        id: APIManager.getRandomInt(),
+        fullName,
+        valuePhone,
+        valueEmail,
+        shipAddress,
+        dateTime,
+        products,
+      };
+
+      showDialog.style.display = "none";
+
+      localStorage.removeItem(keyLocalStorageItemCart);
+      console.log(order);
+
+      APIManager.createCart(order, url);
+
+      setTimeout(function () {
+        window.location.href = "cart.html";
+      }, 2000);
     },
   };
 })();

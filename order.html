@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="./assets/css/icon.css">
     <link rel="stylesheet" href="./assets/css/style_cart.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Cart</title>
+    <title>Order</title>
 </head>
 
 <body>
@@ -100,92 +100,22 @@
 
     <main class="cart">
         <div class="container">
-            <h1>Shopping Cart</h1>
+            <h1>Shopping Order</h1>
+            <div class="cart__info">
+
+            </div>
             <div class="">
                 <table class="cart__table">
-                    <tr>
-                        <th>#</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total Price</th>
-                        <th></th>
-                    </tr>
 
                 </table>
-                <div class="cart__bot">
+
+                <div class="cart__bot cart--total">
 
                 </div>
 
-                <div class="cart__bot">
-                    <a href="./order.html" class="">Order</a>
-                    <a href="#" class="open--dialog">Checkout</a>
+                <div class="cart__bot cart--button">
+
                 </div>
-            </div>
-            <div class="cart__dialog">
-                <form action="">
-                    <label for="">Name</label>
-                    <div class="form--pe">
-                        <div class="form--input">
-                            <input type="text" name="first-name" id="first-name" placeholder="First name">
-                            <p class="first-name-status cart-status"></p>
-                        </div>
-                        <div class="form--input">
-                            <input type="text" name="last-name" id="last-name" placeholder="Last name">
-                            <p class="last-name-status cart-status"></p>
-
-                        </div>
-                    </div>
-                    <div class="form--pe">
-                        <div class="form--input">
-                            <label for="phone">Phone Number</label>
-                            <input type="number" name="phone" id="phone" placeholder="Phone">
-                            <p class="phone-status cart-status"></p>
-                        </div>
-                    </div>
-                    <div class="form--pe">
-                        <div class="form--input">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" placeholder="Email">
-                            <p class="email-status cart-status"></p>
-
-                        </div>
-                    </div>
-                    <div class="form--pe address">
-                        <label for="address">Address: </label>
-                        <div class="">
-                            <select name="conscious" id="conscious">
-                                <option value="">Province</option>
-                            </select>
-                            <select name="districts" id="districts">
-                                <option value="">Districts</option>
-                            </select>
-                            <select name="wards" id="wards">
-                                <option value="">Wards</option>
-                            </select>
-                        </div>
-                        <p class="address-status cart-status"></p>
-
-                    </div>
-
-                    <div class="form--pe">
-                        <div class="form--input">
-                            <label for="street" id="lbStreet">Street Address:</label>
-                            <input type="text" name="street" id="street" placeholder="Street Address">
-                            <p class="street-status cart-status"></p>
-
-                        </div>
-                    </div>
-                    <div class="form--pe">
-                        <div class="form--input form--status">
-                        </div>
-                    </div>
-
-                    <div class="form--pe">
-                        <a href="#" class="close--dialog">Cancel</a>
-                        <a href="" class="submit">Submit</a>
-                    </div>
-                </form>
             </div>
         </div>
     </main>
@@ -258,11 +188,10 @@
         </div>
     </div>
 
-    <script src="./assets/js/main_cart.js"></script>
+    <script src="./assets/js/main_order.js"></script>
     <script src="./assets/js/db.js"></script>
     <script src="./assets/js/library.js"></script>
-    <script src="./assets/js/app_cart.js"></script>
-
+    <script src="./assets/js/app_order.js"></script>
 </body>
 
 </html>
