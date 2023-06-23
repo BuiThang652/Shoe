@@ -2,7 +2,6 @@ const cartTable = document.querySelector(".cart__table");
 const cartButton = document.querySelector(".cart--button");
 const cartInfo = document.querySelector(".cart__info");
 const cartTotal = document.querySelector(".cart--total");
-const cartApi = "https://shoe-data-8yxw.onrender.com/orders/";
 
 // Lấy thông tin trên LocalStorage
 const dataProducts = LocalStorageManager.getDataLocalStorage(
@@ -92,7 +91,7 @@ const detailOrder = (id) => {
         `;
 
         cartButton.innerHTML = `
-        <a href="#" onclick = "APIManager.deleteCart(${item.id})" class="open--dialog">Delete Order</a>
+        <a href="#" onclick = "APIManager.deleteCart('${cartApi}',${item.id})" class="open--dialog">Delete Order</a>
         <a href="./order.html" class="open--dialog">Order</a>
         `;
       }

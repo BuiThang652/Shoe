@@ -371,21 +371,18 @@ const APIManager = (function () {
     },
 
     // Xóa Api
-    deleteCart(id) {
-      LocalStorageManager.removeOrder(
-        "https://shoe-data-8yxw.onrender.com/orders/",
-        id
-      );
+    // api: https://shoe-data-8yxw.onrender.com/orders/
+    deleteCart(url, id) {
+      LocalStorageManager.removeOrder(url, id);
 
       const option = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
       };
 
-      fetch("https://shoe-data-8yxw.onrender.com/orders/" + id, option)
+      fetch(url + id, option)
         .then(function (response) {
           return response.json();
         })
@@ -394,7 +391,9 @@ const APIManager = (function () {
             window.location.href = "order.html";
           }, 1000);
         })
-        .catch(function (err) {});
+        .catch(function (err) {
+          console.log(err);
+        });
     },
 
     // Tạo hàm random

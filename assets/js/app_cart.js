@@ -1,6 +1,4 @@
 (function start() {
-  const cartApi = "https://shoe-data-8yxw.onrender.com/orders/";
-
   // Lấy thông tin trên LocalStorage
   const dataProducts = LocalStorageManager.getDataLocalStorage(
     keyLocalStorageListSP
