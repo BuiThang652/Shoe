@@ -3,8 +3,13 @@
   const productshow = document.querySelector(".products .main__block__bot");
 
   // Lưu dữ liệu lên LocalStorage
-  LocalStorageManager.saveDataLocalStorage(keyLocalStorageListSP);
-  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify([]));
+  if (!localStorage.hasOwnProperty(keyLocalStorageListSP)) {
+    LocalStorageManager.saveDataLocalStorage(keyLocalStorageListSP);
+  }
+
+  if (!localStorage.hasOwnProperty(keyLocalStorageItemCart)) {
+    localStorage.setItem(keyLocalStorageItemCart, JSON.stringify([]));
+  }
 
   // Lấy thông tin trên LocalStorage
   const dataProducts = LocalStorageManager.getDataLocalStorage(
@@ -23,7 +28,6 @@
 
   //   Thêm sản phẩm vào cart
   const addToCartButtons = document.querySelectorAll("a[id]");
-  console.log(addToCartButtons);
 
   addToCartButtons.forEach((button) => {
     button.addEventListener("click", function () {

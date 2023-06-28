@@ -13,25 +13,25 @@ const dataCart = LocalStorageManager.getDataLocalStorage(
 
 const renderDetailOrder = () => {
   cartTable.innerHTML = `
-<tr>
-  <th>#</th>
-  <th>Code orders</th>
-  <th>Time Order</th>
-  <th></th>
-</tr>
-`;
+    <tr>
+      <th>#</th>
+      <th>Code orders</th>
+      <th>Time Order</th>
+      <th></th>
+    </tr>
+    `;
 
-  APIManager.getApi(cartApi, (data) => {
+  APIManager.getApi(cartApiOrder, (data) => {
     let id = 1;
     data.forEach((item) => {
       cartTable.innerHTML += `
-  <tr>
-    <td>${id++}</td>
-    <td>${item.id}</td>
-    <td>${item.dateTime}</td>
-    <td><a href="#" onclick="detailOrder(${item.id})">Detail</a></td>
-  </tr>
-  `;
+      <tr>
+        <td>${id++}</td>
+        <td>${item.order_id}</td>
+        <td>${item.dateTime}</td>
+        <td><a href="#" onclick="detailOrder(${item.order_id})">Detail</a></td>
+      </tr>
+      `;
     });
   });
 
@@ -50,51 +50,56 @@ const detailOrder = (id) => {
     </tr>
   `;
 
-  APIManager.getApi(cartApi, (data) => {
-    let $ = 1;
-    let discount = 0;
-    let totalprice = 0;
-    data.forEach((item) => {
-      if (item.id == id) {
-        item.products.forEach((i) => {
+  APIManager.getApi(cartApiOrder, (dataOrder) => {
+    APIManager.getApi(cartApiProduct, (dataProduct) => {
+      let $ = 1;
+      let discount = 0;
+      let totalprice = 0;
+      dataOrder.forEach((order) => {
+        if (order.order_id == id) {
+          cartInfo.innerHTML = `
+          <p>Code: <span>${order.order_id}</span> </p>
+          <p>Fullname: <span>${order.fullName}</span> </p>
+          <p>Phone: <span>${order.valuePhone}</span></p>
+          <p>Email: <span>${order.valueEmail}</span></p>
+          <p>Address: <span>${order.shipAddress}</span></p>
+          <p>Date Time: <span>${order.dateTime}</span></p>
+          `;
+
+          cartButton.innerHTML = `
+          <a href="#" onclick="APIManager.deleteCart('${cartApiOrder}','${cartApiProduct}',${order.order_id})"
+          class="open--dialog">Delete Order</a>
+          <a href="./order.html" class="open--dialog">Order</a>
+          `;
+        }
+      });
+
+      dataProduct.forEach((product) => {
+        if (product.order_id == id) {
           cartTable.innerHTML += `
         <tr>
           <td>${$++}</td>
-          <td>${i.name}</td>
-          <td>${i.price}</td>
-          <td>${i.soLuong}</td>
+          <td>${product.name}</td>
+          <td>${product.price}</td>
+          <td>${product.soLuong}</td>
         </tr>
         `;
 
-          discount = discount + i.soLuong;
-          totalprice = totalprice + i.price;
-        });
+          discount += product.soLuong;
+          totalprice += product.price * product.soLuong;
 
-        cartTotal.innerHTML = `
-      <div class="cart__bot--discount">
-          <p>Discount</p>
+          cartTotal.innerHTML = `
+        <div class="cart__bot--discount">
+          <p>Discount</p> 
           <span>${discount}</span>
-      </div>
-      <div class="cart__bot--price">
-          <p>Total Price</p>
-          <span>$${totalprice}</span>
-      </div>
-      `;
-
-        cartInfo.innerHTML = `
-        <p>Code: <span>${item.id}</span>  </p>
-        <p>Fullname: <span>${item.fullName}</span>  </p>
-        <p>Phone: <span>${item.valuePhone}</span></p>
-        <p>Email: <span>${item.valueEmail}</span></p>
-        <p>Address: <span>${item.shipAddress}</span></p>
-        <p>Date Time: <span>${item.dateTime}</span></p>
+        </div>
+        <div class="cart__bot--price">
+            <p>Total Price</p>
+            <span>$${totalprice}</span>
+        </div>
         `;
-
-        cartButton.innerHTML = `
-        <a href="#" onclick = "APIManager.deleteCart('${cartApi}',${item.id})" class="open--dialog">Delete Order</a>
-        <a href="./order.html" class="open--dialog">Order</a>
-        `;
-      }
+        }
+      });
     });
   });
 };

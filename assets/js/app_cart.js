@@ -105,7 +105,8 @@
       )
     ) {
       APIManager.saveUserOrderInfo(
-        cartApi,
+        cartApiOrder,
+        cartApiProduct,
         keyLocalStorageListSP,
         dataProducts,
         dataCart,

@@ -16,7 +16,7 @@
 .cart__table {
   width: 100%;
   margin: 20px auto;
-  border: 1px solid var(--gray-border-header);
+  /* border: 1px solid var(--gray-border-header); */
   border-radius: 5px;
   overflow-x: auto;
 }

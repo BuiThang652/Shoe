@@ -14,7 +14,9 @@
 
 * {
   font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Aller", sans-serif;
+  font-family: "Aller Display", sans-serif;
+  font-family: "Aller Light", sans-serif;
   box-sizing: border-box;
 }
 
@@ -57,11 +59,11 @@
 }
 
 .header__right__search input {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-radius: 5px;
   outline: none;
   border: none;
   padding-left: 15px;
+  margin: 6px 0;
 }
 
 .header__right__search label {
@@ -95,6 +97,25 @@
   display: none;
 }
 
+.header__menu--search {
+  position: relative;
+}
+
+.header__menu--search label {
+  position: absolute;
+  top: 24px;
+  left: 35px;
+}
+
+.header__menu--search input {
+  width: 100%;
+  height: 35px;
+  border: 0;
+  border-radius: 5px;
+  outline: none;
+  padding-left: 33px;
+}
+
 nav {
   height: 60px;
 }
@@ -125,6 +146,7 @@ nav .container {
   border-left: 1px solid var(--gray-border-nav);
   border-right: 1px solid var(--gray-border-nav);
   font-weight: 500;
+  font-family: aller;
 }
 
 .section {
@@ -151,17 +173,21 @@ nav .container {
 .section__top--ab {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: 50%;
   height: 460px;
-  padding: 35px 0px 0px 435px;
+  padding: 35px 0;
 }
 
-.section__top--ab h1 {
+.section__top--ab h2 {
   font-weight: 500;
   font-size: 40px;
   width: 300px;
   margin: 10px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* số dòng hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .color-gray {
@@ -172,6 +198,11 @@ nav .container {
   margin: 0;
   font-size: 20px;
   width: 390px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* số dòng hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .section__bot {
@@ -283,10 +314,24 @@ nav .container {
   width: 25%;
 }
 
-.main__addon--ship p,
+.main__addon--ship p {
+  font-size: 12px;
+  text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 6; /* số dòng hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .main__addon--test p {
   font-size: 12px;
   text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* số dòng hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .main__addon--blog {
@@ -333,7 +378,7 @@ nav .container {
 
 .footer__top__right > span {
   font-size: 12px;
-  color: var(--light-text-color);
+  color: #c4c5bf;
 }
 
 .footer__bot {
@@ -423,6 +468,11 @@ nav .container {
 .blog--text h4,
 .blog--text p {
   margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* số dòng hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .blog--text a {
@@ -434,6 +484,7 @@ nav .container {
   position: relative;
   margin: 10px 0;
   width: 32%;
+  background: #fff;
 }
 
 .block--list img {
@@ -445,12 +496,13 @@ nav .container {
 .block--list ul {
   background: #fff;
   margin: -3px 0;
-  padding: 15px 0px 15px 93px;
+  padding: 15px 0px 15px 75px;
   height: 50px;
 }
 
 .block--list:hover ul {
   display: flex;
+  justify-content: space-around;
 }
 
 .block--list:hover p {
@@ -538,7 +590,7 @@ nav .container {
   display: flex;
   text-align: center;
   justify-content: space-around;
-  padding: 10px 10px 8px;
+  padding: 10px 20px 8px;
 }
 
 .bot--item {
@@ -621,6 +673,14 @@ nav .container {
   display: none;
 }
 
+.one-line {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* số dòng hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* desktop */
 @media only screen and (max-width: 992px) {
   .section__top--ab {
@@ -632,7 +692,7 @@ nav .container {
     padding: 35px 0px 0px 420px;
   }
 
-  .section__top--ab h1 {
+  .section__top--ab h2 {
     font-weight: 500;
     font-size: 30px;
     width: 220px;
@@ -719,11 +779,11 @@ nav .container {
     text-decoration: none;
     color: var(--dark-1);
     background: var(--light-text-color);
-    padding: 10px;
+    padding: 5px;
   }
 
   .section__top--img img {
-    height: 340px;
+    height: 315px;
   }
 
   .section__top--ab {
@@ -731,11 +791,11 @@ nav .container {
     top: 0;
     left: 0;
     width: 100%;
-    height: 340px;
+    height: 315px;
     padding: 35px 0px 0px 345px;
   }
 
-  .section__top--ab h1 {
+  .section__top--ab h2 {
     font-weight: 500;
     font-size: 26px;
     width: 180px;
@@ -751,17 +811,18 @@ nav .container {
   .block--list ul {
     background: #fff;
     padding: 0;
+    width: calc(100% - 70px);
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: -4px 0;
+    margin: -4px 70px;
   }
 
-  .btn--price {
+  /* .btn--price {
     width: 50px;
     height: 50px;
     font-size: 10px;
-  }
+  } */
 
   .block--list:hover p {
     display: flex;
@@ -769,7 +830,7 @@ nav .container {
 
   .block--list--price {
     position: absolute;
-    bottom: 5px;
+    bottom: 0px;
     left: 0;
   }
 
@@ -781,7 +842,7 @@ nav .container {
   .block--list p {
     background: #fff;
     margin: 5px 0;
-    padding: 15px 0 15px 55px;
+    padding: 15px 0 15px 75px;
   }
 
   .special__block--btn a {
@@ -836,12 +897,6 @@ nav .container {
   .block--list {
     position: relative;
     width: 100%;
-  }
-
-  .block--list--price {
-    position: absolute;
-    bottom: 5px;
-    left: 0;
   }
 
   .block--list--sale,
@@ -908,7 +963,7 @@ nav .container {
     justify-content: center;
   }
 
-  .section__top--ab h1 {
+  .section__top--ab h2 {
     font-weight: 500;
     font-size: 45px;
     width: 325px;
@@ -947,16 +1002,6 @@ nav .container {
     padding: 5px;
   }
 
-  .btn--price {
-    background: var(--green);
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--light-text-color);
-  }
-
   .block--list:hover ul {
     display: flex;
   }
@@ -965,9 +1010,5 @@ nav .container {
     background: #fff;
     margin: 5px 0;
     padding: 15px 90px;
-  }
-
-  .block--list ul {
-    margin: -4px 0;
   }
 }

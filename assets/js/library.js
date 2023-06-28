@@ -5,7 +5,7 @@ const LocalStorageManager = (function () {
       id: 1,
       name: "Sản phẩm 1",
       price: 35000,
-      soLuong: 111,
+      soLuong: 100,
       thumb: "1.jpg",
       status: "block--list--sale",
     },
@@ -13,7 +13,7 @@ const LocalStorageManager = (function () {
       id: 2,
       name: "Sản phẩm 2",
       price: 10000,
-      soLuong: 211,
+      soLuong: 100,
       thumb: "2.jpg",
       status: "d--none",
     },
@@ -21,7 +21,7 @@ const LocalStorageManager = (function () {
       id: 3,
       name: "Sản phẩm 3",
       price: 30000,
-      soLuong: 211,
+      soLuong: 100,
       thumb: "3.jpg",
       status: "d--none",
     },
@@ -29,7 +29,7 @@ const LocalStorageManager = (function () {
       id: 4,
       name: "Sản phẩm 4",
       price: 35000,
-      soLuong: 111,
+      soLuong: 100,
       thumb: "4.jpg",
       status: "d--none",
     },
@@ -37,7 +37,7 @@ const LocalStorageManager = (function () {
       id: 5,
       name: "Sản phẩm 5",
       price: 10000,
-      soLuong: 211,
+      soLuong: 100,
       thumb: "5.jpg",
       status: "block--list--stock",
     },
@@ -45,7 +45,7 @@ const LocalStorageManager = (function () {
       id: 6,
       name: "Sản phẩm 6",
       price: 30000,
-      soLuong: 211,
+      soLuong: 100,
       thumb: "6.jpg",
       status: "d--none",
     },
@@ -301,26 +301,22 @@ const LocalStorageManager = (function () {
       return products;
     },
 
-    removeOrder(cartApi, id) {
+    removeOrder(cartApiProduct, id) {
       const dataProducts =
         LocalStorageManager.getDataLocalStorage("DANHSACHSP");
 
-      APIManager.getApi(cartApi, function (posts) {
+      APIManager.getApi(cartApiProduct, (posts) => {
         posts.forEach((post) => {
-          if (post.id == id) {
-            const dataOrder = post.products;
-
-            dataOrder.map(function (itemOrder) {
-              dataProducts.map(function (itemSP) {
-                if (itemSP.id == itemOrder.id) {
-                  const updateSoLuong = itemSP.soLuong + itemOrder.soLuong;
-                  itemSP.soLuong = updateSoLuong;
-                  localStorage.setItem(
-                    "DANHSACHSP",
-                    JSON.stringify(dataProducts)
-                  );
-                }
-              });
+          if (post.order_id == id) {
+            dataProducts.map(function (itemSP) {
+              if (itemSP.id == post.product_id) {
+                const updateSoLuong = itemSP.soLuong + post.soLuong;
+                itemSP.soLuong = updateSoLuong;
+                localStorage.setItem(
+                  "DANHSACHSP",
+                  JSON.stringify(dataProducts)
+                );
+              }
             });
           }
         });
@@ -371,9 +367,8 @@ const APIManager = (function () {
     },
 
     // Xóa Api
-    // api: https://shoe-data-8yxw.onrender.com/orders/
-    deleteCart(url, id) {
-      LocalStorageManager.removeOrder(url, id);
+    deleteCart(urlCart, urlProduct, id) {
+      LocalStorageManager.removeOrder(urlProduct, id);
 
       const option = {
         method: "DELETE",
@@ -382,18 +377,47 @@ const APIManager = (function () {
         },
       };
 
-      fetch(url + id, option)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function () {
-          setTimeout(function () {
-            window.location.href = "order.html";
-          }, 1000);
-        })
-        .catch(function (err) {
-          console.log(err);
+      APIManager.getApi(urlCart, (carts) => {
+        carts.forEach((cart) => {
+          if (cart.order_id == id) {
+            const IDCart = cart.id;
+
+            fetch(urlCart + IDCart, option)
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function () {
+                setTimeout(function () {
+                  window.location.href = "order.html";
+                }, 1000);
+              })
+              .catch(function (err) {
+                console.log(err);
+              });
+          }
         });
+      });
+
+      APIManager.getApi(urlProduct, (products) => {
+        products.forEach((product) => {
+          if (product.order_id == id) {
+            const IDProduct = product.id;
+
+            fetch(urlProduct + IDProduct, option)
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function () {
+                setTimeout(function () {
+                  window.location.href = "order.html";
+                }, 1000);
+              })
+              .catch(function (err) {
+                console.log(err);
+              });
+          }
+        });
+      });
     },
 
     // Tạo hàm random
@@ -484,7 +508,8 @@ const APIManager = (function () {
 
     // Save object
     saveUserOrderInfo(
-      url,
+      urlCart,
+      urlProduct,
       keySP,
       dataProducts,
       dataCart,
@@ -521,24 +546,38 @@ const APIManager = (function () {
         today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
       let dateTime = date + " " + time;
 
+      const order_id = APIManager.getRandomInt();
+
       products = LocalStorageManager.editSoLuong(keySP, dataProducts, dataCart);
 
       const order = {
-        id: APIManager.getRandomInt(),
+        order_id,
         fullName,
         valuePhone,
         valueEmail,
         shipAddress,
         dateTime,
-        products,
       };
 
       showDialog.style.display = "none";
 
       localStorage.removeItem(keyLocalStorageItemCart);
-      console.log(order);
 
-      APIManager.createCart(order, url);
+      APIManager.createCart(order, urlCart);
+
+      products.forEach((p) => {
+        const product = {
+          product_id: p.id,
+          order_id,
+          name: p.name,
+          price: p.price,
+          soLuong: p.soLuong,
+          thumb: p.thumb,
+          status: p.status,
+        };
+
+        APIManager.createCart(product, urlProduct);
+      });
 
       setTimeout(function () {
         window.location.href = "cart.html";
