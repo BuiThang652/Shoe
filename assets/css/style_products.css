@@ -24,7 +24,7 @@
 .products__bot--title h2 {
   padding: 0 10px;
   font-size: 36px;
-  width: 300px;
+  /* width: 300px; */
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2; /* số dòng hiển thị */
