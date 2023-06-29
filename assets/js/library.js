@@ -13,7 +13,7 @@ const LocalStorageManager = (function () {
       id: 2,
       name: "Sản phẩm 2",
       price: 10000,
-      soLuong: 100,
+      soLuong: 98,
       thumb: "2.jpg",
       status: "d--none",
     },
@@ -29,7 +29,7 @@ const LocalStorageManager = (function () {
       id: 4,
       name: "Sản phẩm 4",
       price: 35000,
-      soLuong: 100,
+      soLuong: 97,
       thumb: "4.jpg",
       status: "d--none",
     },
@@ -45,7 +45,7 @@ const LocalStorageManager = (function () {
       id: 6,
       name: "Sản phẩm 6",
       price: 30000,
-      soLuong: 100,
+      soLuong: 95,
       thumb: "6.jpg",
       status: "d--none",
     },
@@ -102,6 +102,9 @@ const LocalStorageManager = (function () {
 
     // Truyền vào data và id sản phẩm => Thêm thông tin vào trong LocalStorage của giỏ hàng
     addSP(dataCart, idSP) {
+      const dataProducts =
+        LocalStorageManager.getDataLocalStorage("DANHSACHSP");
+
       cart = {
         idSP: idSP,
         soLuong: 1,
@@ -111,15 +114,44 @@ const LocalStorageManager = (function () {
         dataCart = [];
       }
 
+      let addedToCart = false;
+
       const cartItem = dataCart.find((item) => item.idSP === idSP);
 
-      if (cartItem) {
-        cartItem.soLuong += 1;
+      dataProducts.forEach(function (itemProduct) {
+        if (itemProduct.id == idSP && itemProduct.soLuong >= 1) {
+          if (cartItem) {
+            cartItem.soLuong += 1;
+          } else {
+            dataCart.push(cart);
+          }
+
+          const updateSoLuong = itemProduct.soLuong - 1;
+          itemProduct.soLuong = updateSoLuong;
+
+          addedToCart = true;
+        }
+      });
+
+      if (addedToCart) {
+        toast({
+          title: "Thành công!",
+          message: "Bạn đã thêm một sản phẩm vào giỏ hàng",
+          type: "success",
+          duration: 1000,
+        });
       } else {
-        dataCart.push(cart);
+        toast({
+          title: "Không thành công!",
+          message: "Hết hàng.",
+          type: "error",
+          duration: 1000,
+        });
       }
 
       localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCart));
+
+      localStorage.setItem("DANHSACHSP", JSON.stringify(dataProducts));
     },
 
     // Truyền vào datacart => Tính tổng sản phẩm trong đó
@@ -225,15 +257,40 @@ const LocalStorageManager = (function () {
     deleteProductCart(key, parent, dataCart) {
       parent.forEach((item) => {
         item.addEventListener("click", function (i) {
+          event.preventDefault();
           if (!dataCart) {
             dataCart = [];
           }
 
           let cartItem = dataCart.find((p) => p.idSP == item.id);
 
+          const slProduct = cartItem.soLuong;
+
+          const dataProducts =
+            LocalStorageManager.getDataLocalStorage("DANHSACHSP");
+
+          dataProducts.forEach(function (itemProduct) {
+            if (itemProduct.id == item.id) {
+              const updateSoLuong = itemProduct.soLuong + slProduct;
+              itemProduct.soLuong = updateSoLuong;
+            }
+          });
+
           dataCart.splice(dataCart.indexOf(cartItem), 1);
 
+          localStorage.setItem("DANHSACHSP", JSON.stringify(dataProducts));
           localStorage.setItem(key, JSON.stringify(dataCart));
+
+          toast({
+            title: "Thành công!",
+            message: "Bạn đã xóa một sản phẩm trong giỏ hàng",
+            type: "success",
+            duration: 1000,
+          });
+
+          setTimeout(function () {
+            window.location.href = "cart.html";
+          }, 1000);
         });
       });
     },
@@ -265,7 +322,44 @@ const LocalStorageManager = (function () {
             totalProductPrice.innerHTML = `$${valueQ * product.price}`;
           }
 
+          let addedToCart = false;
+
+          dataCart.forEach(function (itemCart) {
+            if (itemCart.idSP == idIP) {
+              const soLuongCart = itemCart.soLuong;
+
+              dataProducts.forEach(function (itemProduct) {
+                if (itemProduct.id == idIP) {
+                  const slProduct = itemProduct.soLuong + soLuongCart;
+
+                  if (slProduct >= valueQ) {
+                    const updateSoLuong = slProduct - valueQ;
+                    itemProduct.soLuong = updateSoLuong;
+                    addedToCart = true;
+                  }
+                }
+              });
+            }
+          });
+          localStorage.setItem("DANHSACHSP", JSON.stringify(dataProducts));
+
           LocalStorageManager.editQuantity(key, dataCart, id, valueQ);
+
+          if (addedToCart) {
+            toast({
+              title: "Thành công!",
+              message: "Bạn đã thêm một sản phẩm vào giỏ hàng",
+              type: "success",
+              duration: 1000,
+            });
+          } else {
+            toast({
+              title: "Không thành công!",
+              message: "Hết hàng.",
+              type: "error",
+              duration: 1000,
+            });
+          }
 
           LocalStorageManager.renderTotalCart(
             document.querySelectorAll(".nav--cart"),
@@ -277,17 +371,8 @@ const LocalStorageManager = (function () {
       });
     },
 
-    editSoLuong(keySP, dataProducts, dataCart) {
+    getCart(dataProducts, dataCart) {
       const products = [];
-      dataCart.map(function (itemCart) {
-        dataProducts.map(function (itemSP) {
-          if (itemSP.id == itemCart.idSP && itemCart.soLuong < itemSP.soLuong) {
-            const updateSoLuong = itemSP.soLuong - itemCart.soLuong;
-            itemSP.soLuong = updateSoLuong;
-            localStorage.setItem(keySP, JSON.stringify(dataProducts));
-          }
-        });
-      });
 
       dataCart.map(function (itemCart) {
         dataProducts.map(function (itemSP) {
@@ -369,6 +454,13 @@ const APIManager = (function () {
     // Xóa Api
     deleteCart(urlCart, urlProduct, id) {
       LocalStorageManager.removeOrder(urlProduct, id);
+
+      toast({
+        title: "Thành công!",
+        message: "Bạn đã xóa đơn hàng.",
+        type: "success",
+        duration: 1000,
+      });
 
       const option = {
         method: "DELETE",
@@ -548,7 +640,7 @@ const APIManager = (function () {
 
       const order_id = APIManager.getRandomInt();
 
-      products = LocalStorageManager.editSoLuong(keySP, dataProducts, dataCart);
+      products = LocalStorageManager.getCart(dataProducts, dataCart);
 
       const order = {
         order_id,
@@ -577,6 +669,13 @@ const APIManager = (function () {
         };
 
         APIManager.createCart(product, urlProduct);
+      });
+
+      toast({
+        title: "Thành công!",
+        message: "Bạn đã đặt hàng thành công.",
+        type: "success",
+        duration: 1000,
       });
 
       setTimeout(function () {

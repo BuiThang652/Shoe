@@ -8,6 +8,15 @@
     keyLocalStorageItemCart
   );
 
+  // Lưu dữ liệu lên LocalStorage
+  if (!localStorage.hasOwnProperty(keyLocalStorageListSP)) {
+    LocalStorageManager.saveDataLocalStorage(keyLocalStorageListSP);
+  }
+
+  if (!localStorage.hasOwnProperty(keyLocalStorageItemCart)) {
+    localStorage.setItem(keyLocalStorageItemCart, JSON.stringify([]));
+  }
+
   // Hiển thị ra màn hình tổng cart
   const spanProducts = document.querySelectorAll(".nav--cart");
   LocalStorageManager.renderTotalCart(spanProducts, dataCart);

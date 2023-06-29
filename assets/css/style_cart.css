@@ -118,6 +118,8 @@
 .cart__dialog .form--input input {
   padding: 5px 10px;
   border-radius: 5px;
+  outline: none;
+  border: 1px solid;
 }
 
 .cart__dialog .form--pe {
@@ -186,6 +188,10 @@
   margin: 2px 0 0 0;
   font-size: 12px;
   color: red;
+}
+
+.main__block__top {
+  padding: 0 !important;
 }
 
 @media screen and (max-width: 600px) {
