@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Aller";
+  src: url("../Aller/Aller_Bd.ttf") format("truetype");
+}
+
 :root {
   --body-bg: #ebe7df;
   --base-text-color: #242424;
@@ -6,7 +11,7 @@
   --dark: #242424;
   --dark-1: #2e2e2e;
   --orange: #f27e4b;
-  --gray-text-color: #979797;
+  --gray-text-color: #9e9e9e;
   --gray-bg: #adadad;
   --gray-border-nav: #eeeeee;
   --gray-border-header: #383838;
@@ -59,7 +64,7 @@
 }
 
 .header__right__search input {
-  border-radius: 5px;
+  border-radius: 15px;
   outline: none;
   border: none;
   padding-left: 15px;
@@ -73,6 +78,7 @@
   line-height: 43px;
   display: block;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .header__right__search a span {
@@ -146,7 +152,6 @@ nav .container {
   border-left: 1px solid var(--gray-border-nav);
   border-right: 1px solid var(--gray-border-nav);
   font-weight: 500;
-  font-family: aller;
 }
 
 .section {
@@ -322,6 +327,7 @@ nav .container {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 17px;
 }
 
 .main__addon--test p {
@@ -332,6 +338,7 @@ nav .container {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 17px;
 }
 
 .main__addon--blog {
@@ -369,6 +376,7 @@ nav .container {
   font-size: 12px;
   font-style: italic;
   text-align: justify;
+  line-height: 18px;
 }
 
 .footer__top__right p span {
@@ -620,6 +628,7 @@ nav .container {
 
 .bot--item:hover {
   position: relative;
+  animation: fadeIn 1s ease;
 }
 
 .bot--item:hover a {
@@ -632,6 +641,19 @@ nav .container {
 
 .d--none {
   display: none;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .d--block {

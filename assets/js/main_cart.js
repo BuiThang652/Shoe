@@ -7,6 +7,7 @@ search.addEventListener("click", function (event) {
   event.preventDefault(); // Ngăn chặn reload trang
   if (dNone.classList.contains("d--none")) {
     dNone.classList.remove("d--none");
+    dNone.classList.add("fade-in");
   }
 });
 

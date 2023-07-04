@@ -24,7 +24,7 @@
 .products__bot--title h2 {
   padding: 0 10px;
   font-size: 36px;
-  /* width: 300px; */
+  width: 310px;
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2; /* số dòng hiển thị */
@@ -34,7 +34,7 @@
 }
 
 .products__bot p {
-  width: 310px;
+  width: 300px;
   margin: 5px 0;
   display: -webkit-box;
   -webkit-line-clamp: 3; /* số dòng hiển thị */
@@ -58,8 +58,6 @@
 .shopby .container h2 {
   color: var(--light-text-color);
   font-weight: 300;
-  padding: 0 40px;
-  margin-left: 50px;
 }
 
 .shopby__brands {
@@ -72,6 +70,7 @@
 
 .shopby__brands:hover .brand__dropdown {
   display: block;
+  animation: fadeIn 0.5s ease;
 }
 
 .brand__dropdown {
@@ -224,5 +223,11 @@
     z-index: 1;
     background: var(--light-text-color);
     padding: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .products__bot--title h2 {
+    width: 260px;
   }
 }

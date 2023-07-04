@@ -5,19 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-        crossorigin="anonymous" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/normalize.css">
+    <link rel="stylesheet" href="./assets/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/icon.css">
-    <link rel="stylesheet" href="./assets/css/style_cart.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Cart</title>
+    <link rel="stylesheet" href="./assets/css/style_cart.css">
+    <title>Home</title>
 </head>
 
 <body>
@@ -56,7 +49,7 @@
             <div class="header__right">
                 <div class="header__right__search">
                     <form action="">
-                        <input type="search" name="search" id="search" class="d--none">
+                        <input type="search" name="search" id="search" class="d--none" placeholder="Search...">
                         <label for="search"><span class="icon-search1"></span></label>
                     </form>
                 </div>
@@ -77,7 +70,6 @@
     <!-- End header -->
 
     <!-- Nav -->
-
     <nav class="nav__list">
         <div class="container">
             <div class="nav__left">
@@ -103,21 +95,22 @@
 
     <main class="cart">
         <div class="container">
-            <div class="main__block__top">
-                <h1 class="one-line">Shopping Carts</h1>
+            <div class="" style="display: flex;align-items: center;justify-content: space-between;">
+                <div class="main__block__top--left" style="padding-bottom: 30px;">
+                    <h1>Shopping Carts</h1>
+                    <div class="main__block__top--link" style="padding: 2px 5px;">
+                        <a href="./index.html">Home ></a>
+                        <a href="./cart.html">Shopping Carts</a>
+                    </div>
+                </div>
+                <div class="main__block__top--right">
+                </div>
             </div>
             <div class="">
-                <table class="cart__table">
-                    <tr>
-                        <th>#</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total Price</th>
-                        <th></th>
-                    </tr>
+                <ul class="cart__list">
 
-                </table>
+                </ul>
+
                 <div class="cart__bot" style="flex-direction: column;">
 
                 </div>
@@ -127,73 +120,11 @@
                     <a href="#" class="open--dialog">Checkout</a>
                 </div>
             </div>
-            <div class="cart__dialog">
-                <form action="">
-                    <label for="">Name</label>
-                    <div class="form--pe">
-                        <div class="form--input">
-                            <input type="text" name="first-name" id="first-name" placeholder="First name">
-                            <p class="first-name-status cart-status"></p>
-                        </div>
-                        <div class="form--input">
-                            <input type="text" name="last-name" id="last-name" placeholder="Last name">
-                            <p class="last-name-status cart-status"></p>
 
-                        </div>
-                    </div>
-                    <div class="form--pe">
-                        <div class="form--input">
-                            <label for="phone">Phone Number</label>
-                            <input type="number" name="phone" id="phone" placeholder="Phone">
-                            <p class="phone-status cart-status"></p>
-                        </div>
-                    </div>
-                    <div class="form--pe">
-                        <div class="form--input">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" placeholder="Email">
-                            <p class="email-status cart-status"></p>
-
-                        </div>
-                    </div>
-                    <div class="form--pe address">
-                        <label for="address">Address: </label>
-                        <div class="">
-                            <select name="conscious" id="conscious">
-                                <option value="">Province</option>
-                            </select>
-                            <select name="districts" id="districts">
-                                <option value="">Districts</option>
-                            </select>
-                            <select name="wards" id="wards">
-                                <option value="">Wards</option>
-                            </select>
-                        </div>
-                        <p class="address-status cart-status"></p>
-
-                    </div>
-
-                    <div class="form--pe">
-                        <div class="form--input">
-                            <label for="street" id="lbStreet">Street Address:</label>
-                            <input type="text" name="street" id="street" placeholder="Street Address">
-                            <p class="street-status cart-status"></p>
-
-                        </div>
-                    </div>
-                    <div class="form--pe">
-                        <div class="form--input form--status">
-                        </div>
-                    </div>
-
-                    <div class="form--pe">
-                        <a href="" class="submit">Submit</a>
-                        <a href="#" class="close--dialog">Cancel</a>
-                    </div>
-                </form>
-            </div>
         </div>
     </main>
+
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -261,6 +192,79 @@
                 <a href="#">Contact us</a>
             </div>
         </div>
+    </div>
+
+    <div class="cart__dialog">
+        <form action="" style="box-shadow: 8px 19px 70px #88898F;">
+            <h2 style="font-size: 26px; padding: 0 5px;">Personal Details</h2>
+
+            <h3>Contact info</h3>
+            <p>Used for tracking you</p>
+
+            <div class="form--pe form--name">
+                <label for="" style="padding: 0 5px;">Full name</label>
+                <div class="form--input">
+                    <input type="text" name="first-name" id="first-name" placeholder="First">
+                </div>
+                <div class="form--input">
+                    <input type="text" name="last-name" id="last-name" placeholder="Last">
+                </div>
+            </div>
+            <p class="first-name-status cart-status" style="padding-left: 135px;color: red;"></p>
+            <p class="last-name-status cart-status" style="padding-left: 135px;color: red;"></p>
+            <div class="form--pe">
+                <div class="form--input">
+                    <label for="phone">Phone Number</label>
+                    <input type="number" name="phone" id="phone" placeholder="Phone">
+
+                </div>
+            </div>
+            <p class="phone-status cart-status" style="padding-left: 135px;color: red;"></p>
+            <div class="form--pe">
+                <div class="form--input">
+                    <label for="email">Email address</label>
+                    <input type="email" name="email" id="email" placeholder="Email">
+                </div>
+            </div>
+            <p class="email-status cart-status" style="padding-left: 135px;color: red;"></p>
+
+            <h3 style="padding-top: 10px;">Delivery address</h3>
+            <p>Used for shipping orders</p>
+
+            <div class="form--pe">
+                <div class="form--input">
+                    <label for="street" id="lbStreet">Address</label>
+                    <input type="text" name="street" id="street" placeholder="Street, Apt/Suite">
+
+                </div>
+            </div>
+            <p class="street-status cart-status" style="padding-left: 135px;color: red;"></p>
+
+
+            <div class="form--pe address">
+                <select name="conscious" id="conscious">
+                    <option value="">Province</option>
+                </select>
+                <select name="districts" id="districts">
+                    <option value="">Districts</option>
+                </select>
+                <select name="wards" id="wards">
+                    <option value="">Wards</option>
+                </select>
+            </div>
+            <p class="address-status cart-status" style="   color: red;"></p>
+
+
+            <!-- <div class="form--pe">
+                <div class="form--input form--status">
+                </div>
+            </div> -->
+
+            <div class="form--pe btn-form">
+                <a href="" class="submit">Submit</a>
+                <a href="#" class="close--dialog">Cancel</a>
+            </div>
+        </form>
     </div>
 
     <div id="toast"> </div>

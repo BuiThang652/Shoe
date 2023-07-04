@@ -195,58 +195,69 @@ const LocalStorageManager = (function () {
 
     // Truyền vào dataCart và dataProducts => Hiển thị ra số lượng và tổng giá tiền
     renderTotalPriceCart(dataCart, dataProducts) {
-      const showTotal = document.querySelector(".cart__bot");
+      const showTotalPrice = document.querySelector(".cart__bot");
+      const showTotal = document.querySelector(".main__block__top--right");
 
-      showTotal.innerHTML = `
-            <div class="cart__bot--discount">
-                <p>Discount</p>
-                <span>${LocalStorageManager.totalProducts(dataCart)}</span>
-            </div>
+      showTotalPrice.innerHTML = `
             <div class="cart__bot--price">
-                <p>Total Price</p>
+                Total Price: 
                 <span>${LocalStorageManager.totalPrice(
                   dataCart,
                   dataProducts
                 )} VND</span>
             </div>
         `;
+
+      showTotal.innerHTML = `
+        <span>${LocalStorageManager.totalProducts(
+          dataCart
+        )}</span> item in the bag
+        `;
     },
 
     // Truyền vào dataCart và dataProducts => Hiển thị ra bảng
     renderTableCart(dataCart, dataProducts) {
       if (!Array.isArray(dataCart) || dataCart.length === 0) {
-        const message = document.querySelector(
-          ".cart .container > div > table"
-        );
+        const message = document.querySelector(".cart__list");
         const buttonD = document.querySelector(".open--dialog");
 
         message.innerHTML = `<p class="cart--message">You have no products in your shopping cart. <a href="./products.html">Buy now!!!!</a></p>`;
         buttonD.remove();
       } else {
-        let num = 0;
-
         dataCart.forEach((item) => {
           const product = LocalStorageManager.getbyidSP(
             item.idSP,
             dataProducts
           );
 
-          const showCart = document.querySelector(".cart__table");
+          const showCart = document.querySelector(".cart__list");
 
           showCart.innerHTML += `
-            <tr>
-                <td>${(num += 1)}</td>
-                <td>${product.name}</td>
-                <td>$${product.price}</td>
-                <td><input style="width: 50px;" type="number" id="${
-                  product.id
-                }" value="${item.soLuong}" min="1" max="999"></td>
-                <td class="total-price-${product.id}">$${
-            item.soLuong * product.price
-          }</td>
-                <td><a href="" id="${product.id}">x</a></td>
-                </tr>
-                `;
+          <li class="" style="margin-bottom: 15px;">
+            <div class="">
+              <div class="">
+                  <a href="#">
+                      <img src="./assets/img/${product.thumb}" alt="" width="200px" style="
+                      border: 1px solid #ccc;
+                      border-radius: 10px;
+                  ">
+                  </a>
+              </div>
+              <div class="des">
+                  <div class="name"><a href="#">${product.name}</a></div>
+                  <div class="price">Price: <span>$ ${product.price}</span></div>
+                  <div>
+                    <input type="number" class="quantity" min="1" max="99" step="1" value="${item.soLuong}" id="${product.id}">
+                </div>
+              </div>
+            </div>
+            <div class="" style="align-items: center; margin: 0px 40px; justify-content: center;">
+                
+                <div class="remove">
+                    <a href="" id="${product.id}">&times;</a>
+                </div>
+            </div>
+          </li>`;
         });
 
         LocalStorageManager.renderTotalPriceCart(dataCart, dataProducts);
@@ -314,16 +325,6 @@ const LocalStorageManager = (function () {
           const idIP = i.target.id;
           const valueQ = i.target.value;
 
-          const product = dataProducts.find((p) => p.id == idIP);
-          if (product) {
-            const tt = `.total-price-${idIP}`; // Sử dụng giá trị id đã lấy được
-
-            const totalProductPrice = document.querySelector(tt);
-            totalProductPrice.innerHTML = `$${valueQ * product.price}`;
-          }
-
-          let addedToCart = false;
-
           dataCart.forEach(function (itemCart) {
             if (itemCart.idSP == idIP) {
               const soLuongCart = itemCart.soLuong;
@@ -335,31 +336,15 @@ const LocalStorageManager = (function () {
                   if (slProduct >= valueQ) {
                     const updateSoLuong = slProduct - valueQ;
                     itemProduct.soLuong = updateSoLuong;
-                    addedToCart = true;
                   }
                 }
               });
             }
           });
+
           localStorage.setItem("DANHSACHSP", JSON.stringify(dataProducts));
 
           LocalStorageManager.editQuantity(key, dataCart, id, valueQ);
-
-          if (addedToCart) {
-            toast({
-              title: "Thành công!",
-              message: "Bạn đã thêm một sản phẩm vào giỏ hàng",
-              type: "success",
-              duration: 1000,
-            });
-          } else {
-            toast({
-              title: "Không thành công!",
-              message: "Hết hàng.",
-              type: "error",
-              duration: 1000,
-            });
-          }
 
           LocalStorageManager.renderTotalCart(
             document.querySelectorAll(".nav--cart"),

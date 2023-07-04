@@ -89,13 +89,13 @@ const detailOrder = (id) => {
           totalprice += product.price * product.soLuong;
 
           cartTotal.innerHTML = `
-        <div class="cart__bot--discount">
+        <div class="cart__bot--discount" style="text-align: end;display: flex;align-items: center;justify-content: flex-end;">
           <p>Discount</p> 
-          <span>${discount}</span>
+          <span style="width: 100px;padding: 0 15px; font-weight: bold;">${discount}</span>
         </div>
-        <div class="cart__bot--price">
+        <div class="cart__bot--price" style="display: flex;align-items: center;justify-content: flex-end;">
             <p>Total Price</p>
-            <span>$${totalprice}</span>
+            <span style="width: 100px;padding: 0 15px;">$${totalprice}</span>
         </div>
         `;
         }

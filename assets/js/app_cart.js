@@ -25,7 +25,7 @@
   LocalStorageManager.renderTableCart(dataCart, dataProducts);
 
   //   Xóa 1 product trong cart
-  deleteCart = document.querySelectorAll(".cart__table td a");
+  deleteCart = document.querySelectorAll(".remove a");
 
   LocalStorageManager.deleteProductCart(
     keyLocalStorageItemCart,
@@ -34,7 +34,7 @@
   );
 
   //   Thay đổi số lượng của sản phẩm trong cart
-  editInput = document.querySelectorAll(".cart__table td input");
+  editInput = document.querySelectorAll(".quantity");
 
   LocalStorageManager.changeProductQuantityCart(
     keyLocalStorageItemCart,

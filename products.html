@@ -5,15 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-        crossorigin="anonymous" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/normalize.css">
+    <link rel="stylesheet" href="./assets/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/icon.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/style_products.css">
@@ -56,7 +49,7 @@
             <div class="header__right">
                 <div class="header__right__search">
                     <form action="">
-                        <input type="search" name="search" id="search" class="d--none">
+                        <input type="search" name="search" id="search" class="d--none" placeholder="Search...">
                         <label for="search"><span class="icon-search1"></span></label>
                     </form>
                 </div>
@@ -107,34 +100,54 @@
             <div class="container">
                 <div class="products__bot">
                     <div class="products__bot--title">
-                        <div class="btn--price">
+                        <div class="btn--price" style="padding: 0 11px;">
                             $145,99
                         </div>
-                        <h2>1 Pink Shoes 2013 Collection</h2>
+                        <h2>Pink Shoes 2013 Collection</h2>
                     </div>
                     <p>Nunc non fermentum nunc. Sed ut ante
                         eget leo tempor consequat sit amet eu orci.
                         Donec dignissim dolor eget..</p>
                 </div>
             </div>
-            <img src="./assets/img/section-2.png" alt="" style="width: 100%; height: 282px;">
+            <img src="./assets/img/section-4.png" alt="" style="width: 100%; height: 282px;">
         </div>
         <div class="products__wp" style="width: 100%; height: 282px;">
             <div class="container">
                 <div class="products__bot">
                     <div class="products__bot--title">
-                        <div class="btn--price">
+                        <div class="btn--price" style="padding: 0 11px;">
                             $145,99
                         </div>
-                        <h2>2 Pink Shoes 2013 Collection</h2>
+                        <h2>Anna Field</h2>
                     </div>
                     <p>Nunc non fermentum nunc. Sed ut ante
                         eget leo tempor consequat sit amet eu orci.
-                        Donec dignissim dolor eget..</p>
+                        Donec dignissim dolor eget
+                        Nunc non fermentum nunc. Sed ut ante
+                        eget leo tempor consequat sit amet eu orci.
+                        Donec dignissim dolor eget</p>
                 </div>
             </div>
-            <img src="./assets/img/section-2.png" alt="" style="width: 100%; height: 282px;">
+            <img src="./assets/img/section-5.png" alt="" style="width: 100%; height: 282px;">
         </div>
+        <div class="products__wp" style="width: 100%; height: 282px;">
+            <div class="container">
+                <div class="products__bot">
+                    <div class="products__bot--title">
+                        <div class="btn--price" style="padding: 0 11px;">
+                            $145,99
+                        </div>
+                        <h2>Prada</h2>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, nam quod laudantium, facilis
+                        minus maxime saepe illo quia voluptatum possimus tempore doloremque magnam non accusamus
+                        expedita exercitationem, doloribus repellendus. Corrupti.</p>
+                </div>
+            </div>
+            <img src="./assets/img/section-6.png" alt="" style="width: 100%; height: 282px;">
+        </div>
+
     </section>
 
     <aside class="shopby">
@@ -392,20 +405,35 @@
             <div class="footer__top">
                 <div class="footer__top__right">
                     <h4>TEXT WIDGET</h4>
-                    <p>Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies
+                    <p style="display: -webkit-box;
+                    -webkit-line-clamp: 6;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;">Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Nullam id
+                        dolor id nibh ultricies
                         vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis
                         mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
                 </div>
                 <div class="footer__top__right">
                     <h4>TWITTER WIDGET</h4>
-                    <p><span>@ericafustero</span> Why thank you. Your work looks awesome by the way!
+                    <p style="display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;"><span>@ericafustero</span> Why thank you. Your work looks awesome by the
+                        way!
                         <span>@treemelody</span>
                     </p>
-                    <i><span style="font-size: 12px;">19 days ago</span></i>
-                    <p><span>@ericafustero</span> Why thank you. Your work looks awesome by the way!
+                    <i><span style="font-size: 12px; color: #c4c5bf;">19 days ago</span></i>
+                    <p style="display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;"><span>@ericafustero</span> Why thank you. Your work looks awesome by the
+                        way!
                         <span>@treemelody</span>
                     </p>
-                    <i><span style="font-size: 12px;">19 days ago</span></i>
+                    <i><span style="font-size: 12px; color: #c4c5bf;">19 days ago</span></i>
                 </div>
                 <div class="footer__top__right">
                     <h4>FLICKR WIDGET</h4>
