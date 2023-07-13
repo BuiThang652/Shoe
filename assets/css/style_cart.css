@@ -14,6 +14,11 @@
   padding: 30px 0 0;
 }
 
+.of-hid {
+  position: fixed;
+  width: 100%;
+}
+
 .cart__bot {
   display: flex;
   justify-content: flex-end;
@@ -28,6 +33,8 @@
 .cart__bot--price > span {
   font-weight: bold;
   padding-left: 15px;
+  display: inline-block;
+  width: 130px;
 }
 
 .cart__bot a {
@@ -53,12 +60,13 @@
 .cart__dialog {
   width: 100%;
   height: 100%;
-  position: fixed;
+  /* position: absolute; */
   top: 0;
   left: 0;
   align-items: center;
   justify-content: center;
   display: none;
+  position: fixed;
 }
 
 .cart__dialog form {
@@ -95,14 +103,10 @@
 
 .form--input {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 5px;
   width: 100%;
   justify-content: space-between;
-}
-
-.form--pe > label {
-  width: 370px;
 }
 
 .form--pe a:hover {
@@ -232,6 +236,9 @@
   width: 50px;
   height: 50px;
   text-align: center;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 .remove a {
@@ -301,9 +308,29 @@
   margin: 0 5px;
   color: var(--gray-bg);
   font-size: 12px;
+  padding: 5px 0;
 }
 
 @media screen and (max-width: 600px) {
+  .wp {
+    overflow-y: scroll;
+    height: 375px;
+    overflow-x: hidden;
+  }
+
+  .cart__dialog form {
+    width: 300px;
+    height: 600px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-58%, -50%);
+  }
+
+  .cart__dialog .form--pe {
+    align-items: start;
+  }
+
   .cart__dialog .form--pe a {
     width: 100%;
   }
@@ -330,9 +357,7 @@
     width: 100%;
     height: 100%;
     max-height: calc(100vh - 150px);
-    overflow-y: auto;
-    margin-top: 50px;
-    padding-top: 350px;
+    margin-top: 60px;
   }
 
   .cart__dialog .form--pe {
@@ -364,7 +389,7 @@
   }
 
   .address {
-    padding: 0 10px !important;
+    padding: 0 8px !important;
   }
 
   .btn-form {

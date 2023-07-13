@@ -90,11 +90,11 @@ const detailOrder = (id) => {
 
           cartTotal.innerHTML = `
         <div class="cart__bot--discount" style="text-align: end;display: flex;align-items: center;justify-content: flex-end;">
-          <p>Discount</p> 
+          <p>Total Orders: </p> 
           <span style="width: 100px;padding: 0 15px; font-weight: bold;">${discount}</span>
         </div>
         <div class="cart__bot--price" style="display: flex;align-items: center;justify-content: flex-end;">
-            <p>Total Price</p>
+            <p>Total Price: </p>
             <span style="width: 100px;padding: 0 15px;">$${totalprice}</span>
         </div>
         `;
@@ -120,3 +120,45 @@ const detailOrder = (id) => {
 
   renderDetailOrder();
 })();
+
+// Main order
+// Search
+const search = document.querySelector(".header__right__search label");
+const dNone = document.querySelector(".header__right__search input");
+const divSearch = document.querySelector(".header__right__search");
+
+search.addEventListener("click", function (event) {
+  event.preventDefault(); // Ngăn chặn reload trang
+  if (dNone.classList.contains("d--none")) {
+    dNone.classList.remove("d--none");
+  }
+});
+
+document.addEventListener("click", function (event) {
+  if (!divSearch.contains(event.target)) {
+    if (!dNone.classList.contains("d--none")) {
+      dNone.classList.add("d--none");
+    }
+  }
+});
+
+// menu
+const Menu = document.querySelector(".header__menu--logo");
+const navMenu = document.querySelector(".header__menu--nav");
+const divMenu = document.querySelector(".header__menu");
+
+Menu.addEventListener("click", function () {
+  if (navMenu.classList.contains("nav--toggle")) {
+    navMenu.classList.remove("nav--toggle");
+  } else {
+    navMenu.classList.add("nav--toggle");
+  }
+});
+
+document.addEventListener("click", function (event) {
+  if (!divMenu.contains(event.target)) {
+    if (!navMenu.classList.contains("nav--toggle")) {
+      navMenu.classList.add("nav--toggle");
+    }
+  }
+});

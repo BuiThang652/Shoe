@@ -1,43 +1,60 @@
-// Search
-const search = document.querySelector(".header__right__search label");
-const dNone = document.querySelector(".header__right__search input");
-const divSearch = document.querySelector(".header__right__search");
+const cartApiOrder = "https://64887ae40e2469c038fdd981.mockapi.io/orders/";
+const cartApiProduct = "https://64887ae40e2469c038fdd981.mockapi.io/products/";
 
-search.addEventListener("click", function (event) {
-  event.preventDefault(); // Ngăn chặn reload trang
-  if (dNone.classList.contains("d--none")) {
-    dNone.classList.remove("d--none");
-  }
-});
+let listData = [
+  {
+    id: 1,
+    name: "Sản phẩm 1",
+    price: 35000,
+    soLuong: 100,
+    thumb: "1.jpg",
+    status: "block--list--sale",
+  },
+  {
+    id: 2,
+    name: "Sản phẩm 2",
+    price: 10000,
+    soLuong: 98,
+    thumb: "2.jpg",
+    status: "d--none",
+  },
+  {
+    id: 3,
+    name: "Sản phẩm 3",
+    price: 30000,
+    soLuong: 100,
+    thumb: "3.jpg",
+    status: "d--none",
+  },
+  {
+    id: 4,
+    name: "Sản phẩm 4",
+    price: 35000,
+    soLuong: 97,
+    thumb: "4.jpg",
+    status: "d--none",
+  },
+  {
+    id: 5,
+    name: "Sản phẩm 5",
+    price: 10000,
+    soLuong: 100,
+    thumb: "5.jpg",
+    status: "block--list--stock",
+  },
+  {
+    id: 6,
+    name: "Sản phẩm 6",
+    price: 30000,
+    soLuong: 95,
+    thumb: "6.jpg",
+    status: "d--none",
+  },
+];
 
-document.addEventListener("click", function (event) {
-  if (!divSearch.contains(event.target)) {
-    if (!dNone.classList.contains("d--none")) {
-      dNone.classList.add("d--none");
-    }
-  }
-});
+let keyLocalStorageListSP = "DANHSACHSP";
 
-// menu
-const Menu = document.querySelector(".header__menu--logo");
-const navMenu = document.querySelector(".header__menu--nav");
-const divMenu = document.querySelector(".header__menu");
-
-Menu.addEventListener("click", function () {
-  if (navMenu.classList.contains("nav--toggle")) {
-    navMenu.classList.remove("nav--toggle");
-  } else {
-    navMenu.classList.add("nav--toggle");
-  }
-});
-
-document.addEventListener("click", function (event) {
-  if (!divMenu.contains(event.target)) {
-    if (!navMenu.classList.contains("nav--toggle")) {
-      navMenu.classList.add("nav--toggle");
-    }
-  }
-});
+let keyLocalStorageItemCart = "DANHSACHITEMCART";
 
 // Toast
 function toast({ title = "", message = "", type = "info", duration = 3000 }) {

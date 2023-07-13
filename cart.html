@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/normalize.css">
-    <link rel="stylesheet" href="./assets/css/all.min.css">
-    <link rel="stylesheet" href="./assets/css/icon.css">
+    <link rel="stylesheet" href="./assets/plugin/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="./assets/plugin/icon.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/style_cart.css">
     <title>Home</title>
@@ -195,70 +197,64 @@
     </div>
 
     <div class="cart__dialog">
-        <form action="" style="box-shadow: 8px 19px 70px #88898F;">
+        <form action="" style="box-shadow: 8px 19px 70px #88898F;" id="form-cart-dialog">
             <h2 style="font-size: 26px; padding: 0 5px;">Personal Details</h2>
 
-            <h3>Contact info</h3>
-            <p>Used for tracking you</p>
+            <div class="wp">
+                <h3>Contact info</h3>
+                <p>Used for tracking you</p>
 
-            <div class="form--pe form--name">
-                <label for="" style="padding: 0 5px;">Full name</label>
-                <div class="form--input">
-                    <input type="text" name="first-name" id="first-name" placeholder="First">
+                <div class="form--pe form--name">
+                    <label for="" style="padding: 0 5px; width: 370px;">Full name</label>
+                    <div class="form--input">
+                        <input type="text" name="first-name" id="first-name" placeholder="First">
+                        <p class="cart-status" style="color: red;"></p>
+                    </div>
+                    <div class="form--input">
+                        <input type="text" name="last-name" id="last-name" placeholder="Last">
+                        <p class="cart-status" style="color: red;"></p>
+                    </div>
                 </div>
-                <div class="form--input">
-                    <input type="text" name="last-name" id="last-name" placeholder="Last">
+                <div class="form--pe">
+                    <label for="phone" style="padding: 0 5px;">Phone Number</label>
+                    <div class="form--input">
+                        <input type="number" name="phone" id="phone" placeholder="Phone">
+                        <p class="cart-status" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="form--pe">
+                    <label for="email" style="padding: 0 5px;">Email address</label>
+                    <div class="form--input">
+                        <input type="email" name="email" id="email" placeholder="Email">
+                        <p class="email-status cart-status" style="color: red;"></p>
+                    </div>
+                </div>
+
+                <h3 style="padding-top: 10px;">Delivery address</h3>
+                <p>Used for shipping orders</p>
+
+                <div class="form--pe">
+                    <label for="street" id="lbStreet" style="padding: 0 5px;">Address</label>
+                    <div class="form--input">
+                        <input type="text" name="street" id="street" placeholder="Street, Apt/Suite">
+                        <p class=" cart-status" style="color: red;"></p>
+                    </div>
+                </div>
+
+
+                <div class="form--pe address">
+                    <select name="conscious" id="conscious">
+                        <option value="">Province</option>
+                    </select>
+                    <select name="districts" id="districts">
+                        <option value="">Districts</option>
+                    </select>
+                    <select name="wards" id="wards">
+                        <option value="">Wards</option>
+                    </select>
+                    <p class="address-status cart-status" style="width: 100%; color: red;"></p>
                 </div>
             </div>
-            <p class="first-name-status cart-status" style="padding-left: 135px;color: red;"></p>
-            <p class="last-name-status cart-status" style="padding-left: 135px;color: red;"></p>
-            <div class="form--pe">
-                <div class="form--input">
-                    <label for="phone">Phone Number</label>
-                    <input type="number" name="phone" id="phone" placeholder="Phone">
-
-                </div>
-            </div>
-            <p class="phone-status cart-status" style="padding-left: 135px;color: red;"></p>
-            <div class="form--pe">
-                <div class="form--input">
-                    <label for="email">Email address</label>
-                    <input type="email" name="email" id="email" placeholder="Email">
-                </div>
-            </div>
-            <p class="email-status cart-status" style="padding-left: 135px;color: red;"></p>
-
-            <h3 style="padding-top: 10px;">Delivery address</h3>
-            <p>Used for shipping orders</p>
-
-            <div class="form--pe">
-                <div class="form--input">
-                    <label for="street" id="lbStreet">Address</label>
-                    <input type="text" name="street" id="street" placeholder="Street, Apt/Suite">
-
-                </div>
-            </div>
-            <p class="street-status cart-status" style="padding-left: 135px;color: red;"></p>
-
-
-            <div class="form--pe address">
-                <select name="conscious" id="conscious">
-                    <option value="">Province</option>
-                </select>
-                <select name="districts" id="districts">
-                    <option value="">Districts</option>
-                </select>
-                <select name="wards" id="wards">
-                    <option value="">Wards</option>
-                </select>
-            </div>
-            <p class="address-status cart-status" style="   color: red;"></p>
-
-
-            <!-- <div class="form--pe">
-                <div class="form--input form--status">
-                </div>
-            </div> -->
 
             <div class="form--pe btn-form">
                 <a href="" class="submit">Submit</a>
@@ -269,9 +265,9 @@
 
     <div id="toast"> </div>
 
-    <script src="./assets/js/main_cart.js"></script>
-    <script src="./assets/js/db.js"></script>
-    <script src="./assets/js/library.js"></script>
+    <script src="./assets/utils/services.js"></script>
+    <script src="./assets/utils/library.js"></script>
+    <script src="./assets/utils/validate.js"></script>
     <script src="./assets/js/app_cart.js"></script>
 
 </body>

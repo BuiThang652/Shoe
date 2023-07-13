@@ -88,46 +88,78 @@
   });
 
   // Check validate
-  let firstName = document.querySelector("#first-name");
-  let lastName = document.querySelector("#last-name");
-  let phone = document.querySelector("#phone");
-  let email = document.querySelector("#email");
-  let inputConscious = document.querySelector("#conscious");
-  let inputDistricts = document.querySelector("#districts");
-  let inputWards = document.querySelector("#wards");
-  let street = document.querySelector("#street");
-
-  const smCheckout = document.querySelector(".submit");
-  smCheckout.addEventListener("click", function (e) {
-    event.preventDefault();
-
-    if (
-      APIManager.checkValidateForm(
-        firstName,
-        lastName,
-        phone,
-        email,
-        inputConscious,
-        inputDistricts,
-        inputWards,
-        street
-      )
-    ) {
-      APIManager.saveUserOrderInfo(
-        cartApiOrder,
-        cartApiProduct,
-        keyLocalStorageListSP,
-        dataProducts,
-        dataCart,
-        firstName,
-        lastName,
-        phone,
-        email,
-        conscious,
-        districts,
-        wards,
-        street
-      );
-    }
+  validator({
+    form: "#form-cart-dialog",
+    rules: [
+      validator.isFirstName("#first-name"),
+      validator.isLastName("#last-name"),
+      validator.isPhone("#phone"),
+      validator.isEmail("#email"),
+      validator.isStreet("#street"),
+      validator.isWards("#wards"),
+      validator.isDistricts("#districts"),
+      validator.isConscious("#conscious"),
+    ],
   });
 })();
+
+// Main cart
+
+// Search
+const search = document.querySelector(".header__right__search label");
+const dNone = document.querySelector(".header__right__search input");
+const divSearch = document.querySelector(".header__right__search");
+
+search.addEventListener("click", function (event) {
+  event.preventDefault(); // Ngăn chặn reload trang
+  if (dNone.classList.contains("d--none")) {
+    dNone.classList.remove("d--none");
+    dNone.classList.add("fade-in");
+  }
+});
+
+document.addEventListener("click", function (event) {
+  if (!divSearch.contains(event.target)) {
+    if (!dNone.classList.contains("d--none")) {
+      dNone.classList.add("d--none");
+    }
+  }
+});
+
+// menu
+const Menu = document.querySelector(".header__menu--logo");
+const navMenu = document.querySelector(".header__menu--nav");
+const divMenu = document.querySelector(".header__menu");
+
+Menu.addEventListener("click", function () {
+  if (navMenu.classList.contains("nav--toggle")) {
+    navMenu.classList.remove("nav--toggle");
+  } else {
+    navMenu.classList.add("nav--toggle");
+  }
+});
+
+document.addEventListener("click", function (event) {
+  if (!divMenu.contains(event.target)) {
+    if (!navMenu.classList.contains("nav--toggle")) {
+      navMenu.classList.add("nav--toggle");
+    }
+  }
+});
+
+// checkout
+const openDialog = document.querySelector(".open--dialog");
+const closeDialog = document.querySelector(".close--dialog");
+const showDialog = document.querySelector(".cart__dialog");
+
+openDialog.addEventListener("click", function () {
+  event.preventDefault();
+  showDialog.style.display = "flex";
+  document.body.classList.add("of-hid");
+});
+
+closeDialog.addEventListener("click", function () {
+  event.preventDefault();
+  showDialog.style.display = "none";
+  document.body.classList.remove("of-hid");
+});

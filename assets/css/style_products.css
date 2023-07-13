@@ -195,6 +195,11 @@
     justify-content: center;
   }
 
+  .products__bot p {
+    width: auto;
+    text-align: justify;
+  }
+
   .shopby .container h2 {
     display: none;
   }
@@ -224,10 +229,8 @@
     background: var(--light-text-color);
     padding: 0;
   }
-}
 
-@media screen and (max-width: 600px) {
   .products__bot--title h2 {
-    width: 260px;
+    width: auto;
   }
 }

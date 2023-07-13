@@ -200,18 +200,16 @@ const LocalStorageManager = (function () {
 
       showTotalPrice.innerHTML = `
             <div class="cart__bot--price">
+                Total Carts: 
+                <span>${LocalStorageManager.totalProducts(dataCart)}</span>
+            </div>
+            <div class="cart__bot--price">
                 Total Price: 
                 <span>${LocalStorageManager.totalPrice(
                   dataCart,
                   dataProducts
                 )} VND</span>
             </div>
-        `;
-
-      showTotal.innerHTML = `
-        <span>${LocalStorageManager.totalProducts(
-          dataCart
-        )}</span> item in the bag
         `;
     },
 
@@ -510,77 +508,6 @@ const APIManager = (function () {
         id.add(random);
         return random;
       }
-    },
-
-    // Check validate
-    checkValidateForm(
-      firstName,
-      lastName,
-      phone,
-      email,
-      conscious,
-      districts,
-      wards,
-      street
-    ) {
-      // Chuyển tất cả status về giỗng
-      document.querySelectorAll(".cart-status").forEach((e) => {
-        e.innerHTML = ``;
-      });
-
-      // Check Validate first name
-      if (firstName.value.trim() === "") {
-        document.querySelector(
-          ".first-name-status"
-        ).innerHTML = `First name must be filled out`;
-        return false;
-      }
-
-      // Check Validate last name
-      if (lastName.value.trim() === "") {
-        document.querySelector(
-          ".last-name-status"
-        ).innerHTML = `Last name must be filled out`;
-        return false;
-      }
-
-      // Check Validate phone number
-      if (phone.value.trim() === "") {
-        document.querySelector(
-          ".phone-status"
-        ).innerHTML = `Phone number must be filled out`;
-        return false;
-      }
-
-      // Check Validate email
-      if (email.value.trim() === "") {
-        document.querySelector(
-          ".email-status"
-        ).innerHTML = `Email must be filled out`;
-        return false;
-      }
-
-      // Check Validate address
-      if (
-        conscious.value === "" &&
-        districts.value === "" &&
-        wards.value === ""
-      ) {
-        document.querySelector(
-          ".address-status"
-        ).innerHTML = `Address must be filled out`;
-        return false;
-      }
-
-      // Check Validate street address
-      if (street.value.trim() === "") {
-        document.querySelector(
-          ".street-status"
-        ).innerHTML = `Street address must be filled out`;
-        return false;
-      }
-
-      return true;
     },
 
     // Save object

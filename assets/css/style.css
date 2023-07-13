@@ -69,6 +69,7 @@
   border: none;
   padding-left: 15px;
   margin: 6px 0;
+  margin-left: 10px;
 }
 
 .header__right__search label {
